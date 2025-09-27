@@ -129,7 +129,7 @@ export function StickyHeader() {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <nav className="md:hidden mt-4 pb-4 border-t border-border pt-4">
+          <nav className="md:hidden mt-4 rounded-lg border border-border bg-background/95 p-4 shadow-lg backdrop-blur">
             <div className="flex flex-col space-y-4">
               <button
                 onClick={() => scrollToSection("hero")}
