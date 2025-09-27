@@ -51,7 +51,7 @@ export function ServicesFlip() {
                 viewport={{ once: true }}
                 className="flip-card"
                 onClick={() => toggleCard(service.id)}
-                onKeyDown={(e) => {
+                onKeyDown={(e: any) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault()
                     toggleCard(service.id)
