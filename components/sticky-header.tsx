@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Sun, Moon } from "lucide-react"
 
 export function StickyHeader() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +16,38 @@ export function StickyHeader() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  useEffect(() => {
+    const root = document.documentElement
+    const storedTheme = localStorage.getItem("theme")
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+    const shouldUseDark = storedTheme ? storedTheme === "dark" : prefersDark
+
+    if (shouldUseDark) {
+      root.classList.add("dark")
+      setIsDarkMode(true)
+    } else {
+      root.classList.remove("dark")
+      setIsDarkMode(false)
+    }
+  }, [])
+
+  const toggleTheme = () => {
+    setIsDarkMode((prev) => {
+      const next = !prev
+      const root = document.documentElement
+
+      if (next) {
+        root.classList.add("dark")
+        localStorage.setItem("theme", "dark")
+      } else {
+        root.classList.remove("dark")
+        localStorage.setItem("theme", "light")
+      }
+
+      return next
+    })
+  }
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -31,7 +64,7 @@ export function StickyHeader() {
       }`}
     >
       <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           {/* Logo */}
           <div className="text-xl font-bold text-primary cursor-pointer" onClick={() => scrollToSection("hero")}>
             DO | Asesor Financiero
@@ -71,15 +104,27 @@ export function StickyHeader() {
             </button>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" onClick={toggleTheme} className="hidden md:inline-flex">
+              {isDarkMode ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+              <span className="sr-only">Alternar modo oscuro</span>
+            </Button>
+
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              <span className="sr-only">Abrir menú móvil</span>
+            </Button>
+            <Button variant="ghost" size="icon" onClick={toggleTheme} className="md:hidden">
+              {isDarkMode ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+              <span className="sr-only">Alternar modo oscuro</span>
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
