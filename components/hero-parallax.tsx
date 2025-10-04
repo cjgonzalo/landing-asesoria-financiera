@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button"
 import { MessageCircle, Calendar } from "lucide-react"
 import { motion, useScroll, useTransform } from "framer-motion"
 
-export function HeroParallax() {
+export function HeroParallax(
+  { whatsAppRef }: { whatsAppRef: string }
+) {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -16,8 +18,7 @@ export function HeroParallax() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
 
   const handleWhatsAppClick = () => {
-    // Replace with actual WhatsApp number
-    window.open("https://wa.me/54911XXXXYYYY", "_blank")
+    window.open(whatsAppRef, "_blank")
   }
 
   const handleScheduleClick = () => {
@@ -112,6 +113,7 @@ export function HeroParallax() {
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-primary rounded-full" />
+              {/* TODO: agregar entidad expendedora de certificacion */}
               <span>Asesor certificado</span>
             </div>
             <div className="flex items-center gap-2">

@@ -4,8 +4,11 @@ import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { Mail, MessageCircle, Clock, Linkedin, Instagram, Twitter, Users } from "lucide-react"
 import Link from "next/link"
+import { WHATSAPP_REF } from "@/helpers/contact.helper"
 
-export function Footer() {
+export function Footer(
+  { contactEmail, contactPhone }: { contactEmail: string, contactPhone: string }
+) {
   const currentYear = new Date().getFullYear()
 
   return (
@@ -69,8 +72,8 @@ export function Footer() {
                 <Mail className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-background/80 text-sm">Email</p>
-                  <a href="mailto:dario@ejemplo.com" className="text-background hover:text-primary transition-colors">
-                    dario@ejemplo.com
+                  <a href={`mailto:${contactEmail}`} className="text-background hover:text-primary transition-colors">
+                    {contactEmail}
                   </a>
                 </div>
               </div>
@@ -79,12 +82,12 @@ export function Footer() {
                 <div>
                   <p className="text-background/80 text-sm">WhatsApp</p>
                   <a
-                    href="https://wa.me/54911XXXXYYYY"
+                    href={WHATSAPP_REF}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-background hover:text-primary transition-colors"
                   >
-                    +54 9 11 XXXX-YYYY
+                    +{contactPhone}
                   </a>
                 </div>
               </div>
@@ -106,8 +109,7 @@ export function Footer() {
                 <Clock className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-background/80 text-sm">Horario</p>
-                  <p className="text-background">Lun-Vie: 9:00-18:00</p>
-                  <p className="text-background">Sáb: 9:00-13:00</p>
+                  <p className="text-background">Lun-Vie: 9:00 - 17:00</p>
                 </div>
               </div>
             </div>

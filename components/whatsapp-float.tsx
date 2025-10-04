@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button"
 import { MessageCircle, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
-export function WhatsAppFloat() {
+export function WhatsAppFloat(
+  { whatsAppRef }: { whatsAppRef: string }
+) {
   const [isVisible, setIsVisible] = useState(false)
   const [showTooltip, setShowTooltip] = useState(false)
 
@@ -22,7 +24,7 @@ export function WhatsAppFloat() {
   }, [])
 
   const handleWhatsAppClick = () => {
-    window.open("https://wa.me/54911XXXXYYYY", "_blank")
+    window.open(whatsAppRef, "_blank")
   }
 
   if (!isVisible) return null

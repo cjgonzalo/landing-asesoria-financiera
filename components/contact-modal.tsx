@@ -65,7 +65,9 @@ const provincias = [
   "Tucumán",
 ]
 
-export function ContactModal() {
+export function ContactModal(
+  { contactEmail, contactPhone }: { contactEmail: string, contactPhone: string }
+) {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
@@ -156,10 +158,10 @@ export function ContactModal() {
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">Email</h4>
                     <a
-                      href="mailto:dario@ejemplo.com"
+                      href={`mailto:${contactEmail}`}
                       className="text-muted-foreground hover:text-primary transition-colors"
                     >
-                      dario@ejemplo.com
+                      {contactEmail}
                     </a>
                   </div>
                 </div>
@@ -171,13 +173,13 @@ export function ContactModal() {
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">WhatsApp</h4>
                     <a
-                      href="https://wa.me/54911XXXXYYYY"
+                      href={`https://wa.me/${contactPhone.replaceAll(" ", "")}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-muted-foreground hover:text-primary transition-colors"
                       data-analytics="cta_whatsapp"
                     >
-                      +54 9 11 XXXX-YYYY
+                      +{contactPhone}
                     </a>
                   </div>
                 </div>
@@ -188,8 +190,7 @@ export function ContactModal() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">Horario de atención</h4>
-                    <p className="text-muted-foreground">Lunes a Viernes: 9:00 - 18:00</p>
-                    <p className="text-muted-foreground">Sábados: 9:00 - 13:00</p>
+                    <p className="text-muted-foreground">Lunes a Viernes: 9:00 - 17:00</p>
                   </div>
                 </div>
 
@@ -199,7 +200,14 @@ export function ContactModal() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">Ubicación</h4>
-                    <p className="text-muted-foreground">Buenos Aires, Argentina</p>
+                    <a
+                      href="https://maps.app.goo.gl/y9g8soXP85zsN1tq6"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      BALANZ, Buenos Aires, Argentina
+                    </a>
                     <p className="text-sm text-muted-foreground mt-1">Consultas presenciales y virtuales</p>
                   </div>
                 </div>
