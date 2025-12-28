@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Menu, X, Sun, Moon } from "lucide-react"
 
@@ -8,6 +9,8 @@ export function StickyHeader() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,10 +54,16 @@ export function StickyHeader() {
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
-    if (element) {
+    if (element && pathname === "/") {
       element.scrollIntoView({ behavior: "smooth" })
       setIsMobileMenuOpen(false)
+      return
     }
+
+    // If we're on another route, navigate to the root with a hash.
+    // The browser will handle scrolling to the element when the page loads.
+    router.push(`/#${sectionId}`)
+    setIsMobileMenuOpen(false)
   }
 
   return (
