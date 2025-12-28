@@ -9,7 +9,7 @@ import { AlertCircle } from "lucide-react"
 import type { InflationData } from "@/types/market"
 import { parseDate, formatMonthLabel } from "@/lib/format"
 import { INDICATORS_ENDPOINTS } from "@/lib/api-endpoints"
-import { CONTACT_EMAIL, CONTACT_PHONE, WHATSAPP_REF } from "@/helpers/contact.helper"
+import { CONTACT_EMAIL, CONTACT_PHONE, WHATSAPP_REF } from "@/lib/constants"
 
 export const metadata = {
   title: "Indicadores Económicos | Darío Obregón",
@@ -148,8 +148,8 @@ export default function IndicadoresPage() {
           </Suspense>
         </div>
       </main>
-      <Footer contactEmail={CONTACT_EMAIL} contactPhone={CONTACT_PHONE}/>
-      <WhatsAppFloat whatsAppRef={WHATSAPP_REF}/>
+      <Footer contactEmail={CONTACT_EMAIL} contactPhone={CONTACT_PHONE} />
+      <WhatsAppFloat whatsAppRef={WHATSAPP_REF} />
     </div>
   )
 }

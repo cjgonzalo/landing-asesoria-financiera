@@ -4,11 +4,9 @@ import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { Mail, MessageCircle, Clock, Linkedin, Instagram, Twitter } from "lucide-react"
 import Link from "next/link"
-import { WHATSAPP_REF } from "@/helpers/contact.helper"
+import { WHATSAPP_REF } from "@/lib/constants"
 
-export function Footer(
-  { contactEmail, contactPhone }: { contactEmail: string, contactPhone: string }
-) {
+export function Footer({ contactEmail, contactPhone }: { contactEmail: string; contactPhone: string }) {
   const currentYear = new Date().getFullYear()
 
   return (

@@ -8,7 +8,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
 import type { FlowInstrument } from "@/types/market"
 import { FLOWS_ENDPOINTS } from "@/lib/api-endpoints"
-import { CONTACT_EMAIL, CONTACT_PHONE, WHATSAPP_REF } from "@/helpers/contact.helper"
+import { CONTACT_EMAIL, CONTACT_PHONE, WHATSAPP_REF } from "@/lib/constants"
 
 export const metadata = {
   title: "Flujos y Vencimientos | Darío Obregón",
@@ -17,8 +17,9 @@ export const metadata = {
 
 async function getFlows(): Promise<FlowInstrument[]> {
   try {
-    const res = await fetch(FLOWS_ENDPOINTS.instruments,
-      { next: { revalidate: 3600 } } // 1 hour
+    const res = await fetch(
+      FLOWS_ENDPOINTS.instruments,
+      { next: { revalidate: 3600 } }, // 1 hour
     )
 
     if (!res.ok) {
@@ -79,8 +80,8 @@ export default function FlujosPage() {
           </Suspense>
         </div>
       </main>
-      <Footer contactEmail={CONTACT_EMAIL} contactPhone={CONTACT_PHONE}/>
-      <WhatsAppFloat whatsAppRef={WHATSAPP_REF}/>
+      <Footer contactEmail={CONTACT_EMAIL} contactPhone={CONTACT_PHONE} />
+      <WhatsAppFloat whatsAppRef={WHATSAPP_REF} />
     </div>
   )
 }

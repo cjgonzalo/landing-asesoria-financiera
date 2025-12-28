@@ -13,7 +13,7 @@ import { getLastNMonths } from "@/lib/dates"
 import { calculateBandsForMonth } from "@/lib/bands"
 import { formatMonthLabel } from "@/lib/format"
 import { DOLLAR_ENDPOINTS } from "@/lib/api-endpoints"
-import { CONTACT_EMAIL, CONTACT_PHONE, WHATSAPP_REF } from "@/helpers/contact.helper"
+import { CONTACT_EMAIL, CONTACT_PHONE, WHATSAPP_REF } from "@/lib/constants"
 
 export const metadata = {
   title: "Cotizaciones del Dólar | Darío Obregón",
@@ -43,10 +43,8 @@ async function getHistoricalDollarRate(year: number, month: number, day: number)
     const today = new Date()
     const passedDate = new Date(year, month - 1, day)
 
-    const url = passedDate > today
-      ? DOLLAR_ENDPOINTS.official
-      : DOLLAR_ENDPOINTS.historical(year, month, day)
-    
+    const url = passedDate > today ? DOLLAR_ENDPOINTS.official : DOLLAR_ENDPOINTS.historical(year, month, day)
+
     const res = await fetch(url, { next: { revalidate: 86400 } }) // 24 hours - historical data doesn't change
 
     if (!res.ok) {
@@ -151,8 +149,8 @@ export default function DollarPage() {
           </Suspense>
         </div>
       </main>
-      <Footer contactEmail={CONTACT_EMAIL} contactPhone={CONTACT_PHONE}/>
-      <WhatsAppFloat whatsAppRef={WHATSAPP_REF}/>
+      <Footer contactEmail={CONTACT_EMAIL} contactPhone={CONTACT_PHONE} />
+      <WhatsAppFloat whatsAppRef={WHATSAPP_REF} />
     </div>
   )
 }
