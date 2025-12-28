@@ -21,7 +21,7 @@ export interface RiskData {
 
 // Flows Types
 export interface FlowDetail {
-  fecha: string
+  fecha: string // format YYYY-MM-DD
   monto: number
   renta: number
   amortizacion: number
@@ -31,7 +31,7 @@ export interface FlowDetail {
 export interface FlowInstrument {
   ticker: string
   descripcion: string
-  vencimiento: string
+  vencimiento: string // format DD/MM/YYY
   tasa: string
   moneda: string
   minimo: string

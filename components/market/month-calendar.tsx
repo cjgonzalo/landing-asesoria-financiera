@@ -16,7 +16,7 @@ interface MonthCalendarProps {
 }
 
 export function MonthCalendar({ year, month, events }: MonthCalendarProps) {
-  const monthName = new Date(year, month).toLocaleDateString("es-AR", { month: "long", year: "numeric" })
+  const monthName = new Date(year, month).toLocaleDateString("es-AR", { month: "long", year: "numeric" }).replaceAll("De", "")
   const firstDay = new Date(year, month, 1).getDay()
   const daysInMonth = new Date(year, month + 1, 0).getDate()
 
