@@ -12,6 +12,7 @@ import type { DollarRate, BandData } from "@/types/market"
 import { getLastNMonths } from "@/lib/dates"
 import { calculateBandsForMonth } from "@/lib/bands"
 import { formatMonthLabel } from "@/lib/format"
+import { CONTACT_EMAIL, CONTACT_PHONE, WHATSAPP_REF } from "@/helpers/contact.helper"
 
 export const metadata = {
   title: "Cotizaciones del Dólar | Darío Obregón",
@@ -37,15 +38,15 @@ async function getDollarRates(): Promise<DollarRate[]> {
 
 async function getHistoricalDollarRate(year: number, month: number, day: number): Promise<number | null> {
   try {
-    const paddedMonth = String(month).padStart(2, "0")
-    const paddedDay = String(day).padStart(2, "0")
+    // Check if the passed date is after today, if so use today's date
+    const today = new Date()
+    const passedDate = new Date(year, month - 1, day)
 
-    const res = await fetch(
-      `https://api.argentinadatos.com/v1/cotizaciones/dolares/oficial/${year}/${month < 10 ? "0" + month : month}/${day}`,
-      {
-        next: { revalidate: 86400 }, // 24 hours - historical data doesn't change
-      },
-    )
+    const url = passedDate > today
+      ? 'https://dolarapi.com/v1/dolares/oficial'
+      : `https://api.argentinadatos.com/v1/cotizaciones/dolares/oficial/${year}/${month < 10 ? "0" + month : month}/${day}`
+    
+    const res = await fetch(url, { next: { revalidate: 86400 } }) // 24 hours - historical data doesn't change
 
     if (!res.ok) {
       return null
@@ -149,8 +150,8 @@ export default function DollarPage() {
           </Suspense>
         </div>
       </main>
-      <Footer />
-      <WhatsAppFloat />
+      <Footer contactEmail={CONTACT_EMAIL} contactPhone={CONTACT_PHONE}/>
+      <WhatsAppFloat whatsAppRef={WHATSAPP_REF}/>
     </div>
   )
 }
