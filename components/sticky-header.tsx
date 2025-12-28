@@ -58,6 +58,12 @@ export function StickyHeader() {
               Servicios
             </button>
             <button
+              onClick={() => scrollToSection("mercado")}
+              className="text-foreground hover:text-primary transition-colors"
+            >
+              Mercado
+            </button>
+            <button
               onClick={() => scrollToSection("reviews")}
               className="text-foreground hover:text-primary transition-colors"
             >
@@ -103,6 +109,12 @@ export function StickyHeader() {
                 className="text-left text-foreground hover:text-primary transition-colors"
               >
                 Servicios
+              </button>
+              <button
+                onClick={() => scrollToSection("mercado")}
+                className="text-left text-foreground hover:text-primary transition-colors"
+              >
+                Mercado
               </button>
               <button
                 onClick={() => scrollToSection("reviews")}

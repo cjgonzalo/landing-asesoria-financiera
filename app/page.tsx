@@ -1,6 +1,7 @@
 import { HeroParallax } from "@/components/hero-parallax"
 import { About } from "@/components/about"
 import { ServicesFlip } from "@/components/services-flip"
+import { MarketSectionCards } from "@/components/market/market-section-cards"
 import { ReviewsCarousel } from "@/components/reviews-carousel"
 import { ContactModal } from "@/components/contact-modal"
 import { StickyHeader } from "@/components/sticky-header"
@@ -15,6 +16,7 @@ export default function HomePage() {
         <HeroParallax />
         <About />
         <ServicesFlip />
+        <MarketSectionCards />
         <ReviewsCarousel />
         <div id="contact" className="scroll-mt-20">
           <ContactModal />
