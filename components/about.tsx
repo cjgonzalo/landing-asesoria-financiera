@@ -38,7 +38,7 @@ export function About() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="flex justify-center lg:justify-center"
+            className="flex justify-center lg:justify-start"
           >
             <div className="relative">
               <div className="w-80 h-80 rounded-2xl overflow-hidden shadow-2xl">

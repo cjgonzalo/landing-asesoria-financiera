@@ -51,7 +51,7 @@ export function ServicesFlip() {
                 viewport={{ once: true }}
                 className="flip-card"
                 onClick={() => toggleCard(service.id)}
-                onKeyDown={(e: any) => {
+                onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault()
                     toggleCard(service.id)
@@ -74,14 +74,14 @@ export function ServicesFlip() {
                   </Card>
 
                   {/* Back */}
-                  <Card className="flip-card-back bg-primary text-primary-foreground shadow-lg p-6 flex h-full flex-col overflow-hidden cursor-pointer">
+                  <Card className="flip-card-back bg-primary text-primary-foreground shadow-lg p-8 flex flex-col cursor-pointer">
                     <div className="flex items-center justify-between mb-4">
                       <IconComponent className="h-6 w-6" />
                       <span className="text-sm opacity-80">← Toca para volver</span>
                     </div>
                     <h3 className="text-lg font-bold mb-4 text-balance">{service.title}</h3>
                     <p className="text-sm mb-6 opacity-90 text-pretty">{service.backDescription}</p>
-                    <div className="flex-1 space-y-3 overflow-y-auto pr-1">
+                    <div className="space-y-3 flex-1">
                       {service.benefits.map((benefit, benefitIndex) => (
                         <div key={benefitIndex} className="flex items-start gap-2">
                           <CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />

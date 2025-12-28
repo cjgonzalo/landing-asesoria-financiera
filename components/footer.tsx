@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import { Mail, MessageCircle, Clock, Linkedin, Instagram, Twitter, Users } from "lucide-react"
+import { Mail, MessageCircle, Clock, Linkedin, Instagram, Twitter } from "lucide-react"
 import Link from "next/link"
 
 export function Footer() {
@@ -40,7 +40,7 @@ export function Footer() {
                 variant="outline"
                 size="icon"
                 className="rounded-full bg-transparent border-background/20 text-background hover:bg-primary hover:text-primary-foreground hover:border-primary"
-                onClick={() => window.open("https://www.instagram.com/asesordarioobregon?igsh=MTJhNTQyNWVyY29iNQ==", "_blank")}
+                onClick={() => window.open("https://instagram.com/dario.obregon.financiero", "_blank")}
               >
                 <Instagram className="h-4 w-4" />
               </Button>
@@ -85,20 +85,6 @@ export function Footer() {
                     className="text-background hover:text-primary transition-colors"
                   >
                     +54 9 11 XXXX-YYYY
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Users className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-background/80 text-sm">Comunidad WhatsApp</p>
-                  <a
-                    href="https://chat.whatsapp.com/CaR5OUA9IMs1IsEfJ9F0WS"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-background hover:text-primary transition-colors"
-                  >
-                    Unite a la comunidad
                   </a>
                 </div>
               </div>
@@ -154,6 +140,11 @@ export function Footer() {
           className="border-t border-background/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
         >
           <p className="text-background/60 text-sm">© {currentYear} Darío Obregón. Todos los derechos reservados.</p>
+          <div className="flex items-center gap-4 text-sm text-background/60">
+            <span>Hecho con</span>
+            <span className="text-primary">♥</span>
+            <span>en Buenos Aires</span>
+          </div>
         </motion.div>
       </div>
     </footer>
