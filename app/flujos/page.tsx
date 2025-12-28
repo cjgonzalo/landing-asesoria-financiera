@@ -7,6 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
 import type { FlowInstrument } from "@/types/market"
+import { CONTACT_EMAIL, CONTACT_PHONE, WHATSAPP_REF } from "@/helpers/contact.helper"
 
 export const metadata = {
   title: "Flujos y Vencimientos | Darío Obregón",
@@ -15,9 +16,9 @@ export const metadata = {
 
 async function getFlows(): Promise<FlowInstrument[]> {
   try {
-    const res = await fetch("https://www.acuantoesta.com.ar/api/flujos", {
-      next: { revalidate: 3600 }, // 1 hour
-    })
+    const res = await fetch("https://www.acuantoesta.com.ar/api/flujos",
+      { next: { revalidate: 3600 } } // 1 hour
+    )
 
     if (!res.ok) {
       throw new Error("Failed to fetch flows")
@@ -77,8 +78,8 @@ export default function FlujosPage() {
           </Suspense>
         </div>
       </main>
-      <Footer />
-      <WhatsAppFloat />
+      <Footer contactEmail={CONTACT_EMAIL} contactPhone={CONTACT_PHONE}/>
+      <WhatsAppFloat whatsAppRef={WHATSAPP_REF}/>
     </div>
   )
 }
