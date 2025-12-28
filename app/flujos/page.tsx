@@ -7,6 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
 import type { FlowInstrument } from "@/types/market"
+import { FLOWS_ENDPOINTS } from "@/lib/api-endpoints"
 import { CONTACT_EMAIL, CONTACT_PHONE, WHATSAPP_REF } from "@/helpers/contact.helper"
 
 export const metadata = {
@@ -16,7 +17,7 @@ export const metadata = {
 
 async function getFlows(): Promise<FlowInstrument[]> {
   try {
-    const res = await fetch("https://www.acuantoesta.com.ar/api/flujos",
+    const res = await fetch(FLOWS_ENDPOINTS.instruments,
       { next: { revalidate: 3600 } } // 1 hour
     )
 
@@ -24,7 +25,7 @@ async function getFlows(): Promise<FlowInstrument[]> {
       throw new Error("Failed to fetch flows")
     }
 
-    return res.json()
+    return await res.json()
   } catch (error) {
     console.error("Error fetching flows:", error)
     return []

@@ -12,6 +12,7 @@ import type { DollarRate, BandData } from "@/types/market"
 import { getLastNMonths } from "@/lib/dates"
 import { calculateBandsForMonth } from "@/lib/bands"
 import { formatMonthLabel } from "@/lib/format"
+import { DOLLAR_ENDPOINTS } from "@/lib/api-endpoints"
 import { CONTACT_EMAIL, CONTACT_PHONE, WHATSAPP_REF } from "@/helpers/contact.helper"
 
 export const metadata = {
@@ -21,7 +22,7 @@ export const metadata = {
 
 async function getDollarRates(): Promise<DollarRate[]> {
   try {
-    const res = await fetch("https://dolarapi.com/v1/dolares", {
+    const res = await fetch(DOLLAR_ENDPOINTS.current, {
       next: { revalidate: 300 }, // 5 minutes
     })
 
@@ -43,8 +44,8 @@ async function getHistoricalDollarRate(year: number, month: number, day: number)
     const passedDate = new Date(year, month - 1, day)
 
     const url = passedDate > today
-      ? 'https://dolarapi.com/v1/dolares/oficial'
-      : `https://api.argentinadatos.com/v1/cotizaciones/dolares/oficial/${year}/${month < 10 ? "0" + month : month}/${day}`
+      ? DOLLAR_ENDPOINTS.official
+      : DOLLAR_ENDPOINTS.historical(year, month, day)
     
     const res = await fetch(url, { next: { revalidate: 86400 } }) // 24 hours - historical data doesn't change
 

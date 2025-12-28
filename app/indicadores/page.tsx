@@ -8,6 +8,8 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
 import type { InflationData } from "@/types/market"
 import { parseDate, formatMonthLabel } from "@/lib/format"
+import { INDICATORS_ENDPOINTS } from "@/lib/api-endpoints"
+import { CONTACT_EMAIL, CONTACT_PHONE, WHATSAPP_REF } from "@/helpers/contact.helper"
 
 export const metadata = {
   title: "Indicadores Económicos | Darío Obregón",
@@ -16,7 +18,7 @@ export const metadata = {
 
 async function getMonthlyInflation(): Promise<InflationData[]> {
   try {
-    const res = await fetch("https://api.argentinadatos.com/v1/finanzas/indices/inflacion", {
+    const res = await fetch(INDICATORS_ENDPOINTS.monthlyInflation, {
       next: { revalidate: 3600 }, // 1 hour
     })
 
@@ -33,7 +35,7 @@ async function getMonthlyInflation(): Promise<InflationData[]> {
 
 async function getAnnualInflation(): Promise<InflationData[]> {
   try {
-    const res = await fetch("https://api.argentinadatos.com/v1/finanzas/indices/inflacionInteranual", {
+    const res = await fetch(INDICATORS_ENDPOINTS.annualInflation, {
       next: { revalidate: 3600 }, // 1 hour
     })
 
@@ -50,7 +52,7 @@ async function getAnnualInflation(): Promise<InflationData[]> {
 
 async function getCountryRisk(): Promise<InflationData[]> {
   try {
-    const res = await fetch("https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais", {
+    const res = await fetch(INDICATORS_ENDPOINTS.countryRisk, {
       next: { revalidate: 3600 }, // 1 hour
     })
 
@@ -146,8 +148,8 @@ export default function IndicadoresPage() {
           </Suspense>
         </div>
       </main>
-      <Footer />
-      <WhatsAppFloat />
+      <Footer contactEmail={CONTACT_EMAIL} contactPhone={CONTACT_PHONE}/>
+      <WhatsAppFloat whatsAppRef={WHATSAPP_REF}/>
     </div>
   )
 }
