@@ -4,9 +4,9 @@ import { calculateBandsForMonth } from "@/lib/bands"
 import { TrendingUp, TrendingDown } from "lucide-react"
 
 export function BandsCard() {
-  const baseDate = "Abril 2025"
-  const upperBase = 1400
-  const lowerBase = 1000
+  const baseMonth = "Abril 2025"
+  const baseUpperBandValue = "$1400"
+  const baseLowerBandValue = "$1000"
   const monthlyRate = "1%"
   const today = new Date()
   const { lower, upper } = calculateBandsForMonth(today)
@@ -15,7 +15,7 @@ export function BandsCard() {
     <Card className="rounded-2xl shadow-sm">
       <CardHeader>
         <CardTitle className="text-xl">Bandas Cambiarias</CardTitle>
-        <CardDescription>Mes base: {baseDate}</CardDescription>
+        <CardDescription>Las bandas cambiarias fueron implementadas en {baseMonth} con valores base de {baseUpperBandValue} para la banda superior y {baseLowerBandValue} para la banda inferior</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex items-start gap-3 p-4 rounded-lg bg-red-50 border border-red-200">
